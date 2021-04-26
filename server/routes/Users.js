@@ -86,8 +86,8 @@ router.post('/register',
         Username, 
         Password, 
         ConfirmPassword,
-        Birthday,
         AuditionID,
+        Scores,
     } = req.body
     if (Password !== ConfirmPassword){
         return res.json({
@@ -128,8 +128,8 @@ router.post('/register',
         Role: Role, 
         Username: Username, 
         Password: Password, 
-        Birthday: Birthday,
         AuditionID: AuditionID,
+        Scores: Scores,
     });
 
     bcrypt.genSalt(10, (err, salt) => {
@@ -223,9 +223,6 @@ router.put('/:profileId', passport.authenticate('jwt', {
             if (req.body.CompanyName != undefined) {
               user.CompanyName = req.body.CompanyName;
             }
-            if (req.body.Image != undefined) {
-              user.Image = req.body.Image;
-            }
             if (req.body.FirstName != undefined) {
               user.FirstName = req.body.FirstName;
             }
@@ -249,12 +246,6 @@ router.put('/:profileId', passport.authenticate('jwt', {
             }
             if (req.body.Zip != undefined) {
               user.Zip = req.body.Zip;
-            }
-            if (req.body.Username != undefined) {
-              user.Username = req.body.Username;
-            }
-            if (req.body.AuditionID != undefined) {
-              user.AuditionID = req.body.AuditionID;
             }
             if (req.body.Password != undefined) {
               bcrypt.hash(req.body.password, 10, async (err, hash) => {

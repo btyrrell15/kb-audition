@@ -5,14 +5,16 @@
         <v-flex xs12>
                 <v-img src="../assets/tuacahn.png" height="120" width="200" class="mt-4 ml-auto mr-auto"></v-img>
       </v-flex>
-      <v-flex xs12 class="white--text text-center">Audition Name</v-flex>
+      <v-flex xs12 class="white--text text-center">
+        <h3>{{auditionName}}</h3>
+      </v-flex>
         <v-layout row wrap>
             <v-flex xs12 class="text-center">
-                <v-avatar size="300" class="mb-12 mt-12">
+                <v-avatar size="300" class="mb-2 mt-8 grey darken-4">
                 <v-img 
-                    src="https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80"
-                    
-                    ></v-img>
+                  :src="performer.Image"
+                  
+                  ></v-img>
                 </v-avatar>
             </v-flex>
             <v-flex xs12 class="text-center">
@@ -30,7 +32,7 @@
                 <v-btn class="pink white--text">View Resume</v-btn>
             </v-flex>
 
-            <v-flex xs12 class="text-center">
+            <!-- <v-flex xs12 class="text-center">
                 <h1 class="pt-8 font-weight-light">SPECIALTIES</h1>
                 <v-divider color="white" class="ml-14 mr-14 mt-2 mb-2"></v-divider>
                 <div>
@@ -41,7 +43,7 @@
                     <span class="white--text">Specialty 2</span>
                     <span class="white--text">Rating 10/10</span>
                 </div>
-            </v-flex>
+            </v-flex> -->
             <v-flex xs12 class="text-center">
                 <h1 class="pt-8 font-weight-light">SCORING</h1>
                 <v-divider color="white" class="ml-14 mr-14 mt-2 mb-2"></v-divider>
@@ -101,6 +103,8 @@ export default {
       auditionId: localStorage.getItem('AuditionID'),
       judgeId: localStorage.getItem('user'),
       scored: "",
+      auditionName: "",
+      temp: [],
     }
   }, 
 
@@ -180,7 +184,19 @@ export default {
     addTotal: function() {
       console.log("clicked")
       this.newOverall = this.newVocal
-    }
+    },
+
+     checkAudition() {
+      axios.get(`${url}/audition`).then(res => {
+        this.temp = res.data.auditions
+        for (var i = 0; i < this.temp.length; i++) {
+          if (this.auditionId == this.temp[i]._id){
+            this.auditionName = this.temp[i].AuditionName
+          }
+        }
+        console.log(this.audition)
+      })
+    },
 
   },
   
@@ -192,6 +208,7 @@ export default {
   created() {
       this.getUser()
       this.getPerformer()
+      this.checkAudition()
   }
   
 }

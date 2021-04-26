@@ -18,7 +18,7 @@
             <v-flex xs12 class="text-center">
                 <v-dialog v-model="dialog" max-width="100%">
                     <template v-slot:activator="{ on }">
-                    <v-btn class="cyan accent-3 mt-3 white--text" v-on="on" @click="showAdd()" v-if="user.Role=='Company'"
+                    <v-btn class="mt-3 pink white--text" outlined v-on="on" @click="showAdd()" v-if="user.Role=='Company'"
                         >Add Audition</v-btn
                     >
                     </template>
@@ -81,22 +81,22 @@
                                 <v-date-picker
                                   v-model="newAuditionDate"
                                   scrollable
-                                  color="purple"
+                                  color="pink"
                                 >
                                   <v-spacer></v-spacer>
                                   <v-btn
                                     text
-                                    color="purple"
-                                    @click="modal = false"
-                                  >
-                                    Cancel
-                                  </v-btn>
-                                  <v-btn
-                                    text
-                                    color="purple"
+                                    color="pink"
                                     @click="$refs.dialog.save(date)"
                                   >
                                     OK
+                                  </v-btn>
+                                  <v-btn
+                                    text
+                                    color="pink"
+                                    @click="modal = false"
+                                  >
+                                    Cancel
                                   </v-btn>
                                 </v-date-picker>
                                 
@@ -145,7 +145,7 @@
               <v-card class="grey darken-4 pb-2">
               <h2 class="font-weight-light white--text">Live Auditions</h2>
               <v-divider class="cyan accent-3 ml-14 mr-14 mb-2 mt-2"></v-divider>
-              <v-expansion-panels class="ml-1 pr-2">
+              <v-expansion-panels focusable dark class="ml-1 pr-2">
                 <v-expansion-panel
                   v-for="audition in live"
                   :key="audition._id"
@@ -154,7 +154,7 @@
                   <v-expansion-panel-content class="grey darken-4 white--text">
                     <router-link to="/List">
                        <v-btn 
-                          class="mt-3"
+                          class="mt-3 pink white--text"
                           @click="setAuditionID(audition)"
                         >
                           View Audition
@@ -179,33 +179,33 @@
                     >
                     <v-expansion-panel-header class="grey darken-4 white--text">{{audition.AuditionName}}</v-expansion-panel-header>
                     <v-expansion-panel-content class="grey darken-4 white--text">
-                       <div class="ma-1">Amount of Roles to be Filled: {{ audition.RoleNames.length }}</div>
-                       <div class="ma-1">Date of Audition: {{ audition.AuditionDate }}</div>
-                       <div class="ma-1">Location: {{ audition.Location }}</div>
+                       <div class="ma-1"><h3>Amount of Roles to be Filled:</h3> {{ audition.RoleNames.length }}</div>
+                       <div class="ma-1"><h3>Date of Audition:</h3> {{ audition.AuditionDate }}</div>
+                       <div class="ma-1"><h3>Location:</h3> {{ audition.Location }}</div>
                        <div v-if="user.Role=='Company'">
-                         <v-btn @click="viewAudition(audition)">
+                         <v-btn @click="viewAudition(audition)" outlined class="ma-1">
                             <v-icon>edit</v-icon>
                             Edit
                           </v-btn>
                           
-                          <v-btn @click="deleteAudition(audition)">
+                          <v-btn @click="deleteAudition(audition)" outlined class="ma-1">
                             <v-icon >delete</v-icon>
                             Delete
                           </v-btn>
                           <router-link to="/Scores">
-                            <v-btn @click="setAuditionID(audition)" >Scores</v-btn>
+                            <v-btn @click="setAuditionID(audition)" class="pink ma-1">Scores</v-btn>
 
                           </router-link>
                        </div>
-                       <div v-if="registered">
-                          <v-btn v-if="user.Role=='Judge'" @click="registerJudge(audition)">Register</v-btn>
+                       <div v-if="!registered">
+                          <v-btn v-if="user.Role=='Judge'" @click="registerJudge(audition)" class="pink mb-1">Register</v-btn>
                        </div>
-                       <div v-if="user.Role=='Judge'">
+                       <div v-if="registered">
                           <v-icon class="green--text">checked</v-icon>
                           Registered
                       </div>
                       <router-link to="/List">
-                          <v-btn v-if="user.Role=='Judge'" @click="setAuditionID(audition)">Score Audition</v-btn>
+                          <v-btn v-if="user.Role=='Judge'" @click="setAuditionID(audition)" outlined>Score Audition</v-btn>
                       </router-link>
                       <div v-if="user.Role=='Performer'"> 
                         <router-link to="/Scores">
@@ -234,31 +234,31 @@
                     >
                     <v-expansion-panel-header class="grey darken-4 white--text">{{audition.AuditionName}}</v-expansion-panel-header>
                     <v-expansion-panel-content class="grey darken-4 white--text">
-                      <div class="ma-1">Amount of Roles to be Filled: {{ audition.Roles }}</div>
-                      <div class="ma-1">Date of Audition: {{ audition.AuditionDate }}</div>
-                       <div class="ma-1">Performers Signed Up: {{ audition.AuditionDate }}</div>
+                      <div class="ma-1"><h3>Amount of Roles to be Filled:</h3> {{ audition.Roles }}</div>
+                      <div class="ma-1"><h3>Date of Audition:</h3> {{ audition.AuditionDate }}</div>
+                       <div class="ma-1"><h3>Location</h3> {{ audition.AuditionDate }}</div>
                        <div v-if="user.Role=='Company'">
                          
-                          <v-btn @click="viewAudition(audition)">
+                          <v-btn @click="viewAudition(audition)" outlined class="ma-1">
                             <v-icon >visibility</v-icon>
                               View
                             </v-btn>
 
-                            <v-btn @click="deleteAudition(audition)">
+                            <v-btn @click="deleteAudition(audition)" outlined class="ma-1">
                                <v-icon>delete</v-icon>
                               Delete
                             </v-btn>
 
                             <router-link to="/Scores">
-                              <v-btn @click="setAuditionID(audition)">Scores</v-btn>
+                              <v-btn @click="setAuditionID(audition)" class="pink ma-1">Scores</v-btn>
 
                             </router-link>
                              
                        
                        </div>
-                        <v-btn v-if="user.Role=='Judge'" @click="registerJudge(audition)">Register</v-btn>
-                        <router-link to="/Performer">
-                          <v-btn v-if="user.Role=='Judge'">View Scores</v-btn>
+                        <!-- <v-btn v-if="user.Role=='Judge'" @click="registerJudge(audition)">Register</v-btn> -->
+                        <router-link to="/Scores">
+                          <v-btn v-if="user.Role=='Judge'" class="pink">View Scores</v-btn>
                         </router-link>
                         <v-btn v-if="registered">
                           <v-icon>checked</v-icon>
@@ -420,7 +420,7 @@ export default {
       this.titleForm = "Viewing " + audition.AuditionName;
       this.dialog = true;
       this.editAudition = true;
-      this.saveAudition = false;
+      this.newAudition = false;
       this.newAuditionName = audition.AuditionName;
       this.newAuditionDescription = audition.AuditionDescription;
       this.newLocation = audition.Location;
@@ -518,7 +518,7 @@ export default {
     },
 
     registerJudge(audition){
-      alert('Are you sure you want to register as a judge for this audition?')
+      alert('Are you sure you want to register as a judge for this audition? The company will need to approve this request')
       this.attachedAuditions.push(audition._id)
       var req_body = {
         AuditionID: this.attachedAuditions,

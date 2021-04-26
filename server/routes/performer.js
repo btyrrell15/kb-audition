@@ -38,6 +38,8 @@ router.post('/', passport.authenticate('jwt',{
         JudgeID: req.body.JudgeID,
         UserID: req.body.UserID,
         Scored: req.body.Scored,
+        Registered: req.body.Registered,
+        Image: req.body.Image,
         
       });
       await performer.save()
@@ -134,7 +136,12 @@ router.put('/:performerID', passport.authenticate('jwt',{
                 if (req.body.Scored != undefined){
                     performer.Scored = req.body.Scored;
                 }
-                
+                if (req.body.Registered != undefined){
+                    performer.Registered = req.body.Registered;
+                }
+                if (req.body.Registered != undefined){
+                    performer.Registered = req.body.Registered;
+                }
                 performer.save().then(function(){
                     res.status(200);
                     res.json({

@@ -45,6 +45,12 @@ const PerformerSchema = new Schema({
     Scored: {
         type: String,
     },
+    Registered: {
+        type: String,
+    },
+    Image: {
+        type: String,
+    },
     
 });
 

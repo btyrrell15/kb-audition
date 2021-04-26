@@ -1,5 +1,6 @@
 <template>
   <div>
+   <v-snackbar v-model="message" top>{{text}}  <v-btn color="pink" text  @click="message = false"> Close</v-btn></v-snackbar>
     <v-divider class="pink ml-4 mr-4 mb-2"></v-divider>
     <v-container>
         <v-layout row wrap class="text-center">
@@ -33,12 +34,12 @@
                        <div class="ma-1"><h4>Audition Location</h4> {{ audition.CompanyName }}</div>
                        <v-dialog v-model="dialog" max-width="100%">
                     <template v-slot:activator="{ on }">
-                    <v-btn class="cyan accent-3 mt-3" v-on="on" @click="showAdd()"
+                    <v-btn class="cyan accent-3 mt-3" v-on="on" @click="showAdd()" :disabled="audition.Registered"
                         >Register</v-btn
                     >
                     </template>
-                    <v-card>
-                    <v-card-title class="purple">
+                    <v-card class="grey darken-4" dark>
+                    <v-card-title class="pink">
                         <span class="headline white--text">{{ titleForm  }}</span>
                     </v-card-title>
                     <v-card-text>
@@ -86,26 +87,26 @@
                                 label="Zip"
                             ></v-text-field>
                             </v-col>
-                            <v-col cols="12" sm="12">
+                            <!-- <v-col cols="12" sm="12">
                               <v-text-field
                                 v-model="newSpecialties"
                                 label="Specialties"
                             ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12">
+                            </v-col> -->
+                            <!-- <v-col cols="12" sm="12">
                               <v-file-input label="Upload Resume"></v-file-input>
-                            </v-col>
+                            </v-col> -->
                         </v-row>
                         </v-container>
                     </v-card-text>
 
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn class="teal accent-3" text @click="addPerformer(audition)" v-if="newAudition">Register</v-btn
+                        <v-btn class="cyan accent-3 white--text" text @click="addPerformer(audition)" v-if="newAudition">Register</v-btn
                         >
                         <v-btn color="purple" text @click="updatePerformer()" v-if="editAudition">Update</v-btn
                         >
-                        <v-btn color="purple" text @click="close">Cancel</v-btn>
+                        <v-btn text @click="close">Cancel</v-btn>
                     </v-card-actions>
                     </v-card>
                 </v-dialog>
@@ -136,7 +137,6 @@ export default {
       message: "",
       text: "",
       titleForm: "New Audition",
-      msg: false,
       newAuditionName: "",
       newRoles: "",
       newRoleNames: "",
@@ -162,6 +162,7 @@ export default {
       performers: [],
       performerId: '',
       userID: '',
+      registered: "",
     }
   }, 
 
@@ -206,7 +207,9 @@ export default {
         Zip: this.newZip,
         Resume: this.newResume,
         AuditionID: audition._id,
-        UserID: this.user._id
+        UserID: this.user._id,
+        Registered: this.registered,
+        Image: this.user.Image
         
       };
 
@@ -224,8 +227,8 @@ export default {
         this.newState = "";
         this.newZip = "";
         this.newResume = "";
-        this.message =true;
-        this.text ="You've Successfully Registered for " + audition.Name;
+        this.message = true;
+        this.text ="You've successfully registered for the audition";
       });
       this.close();
     },
@@ -271,7 +274,7 @@ export default {
           this.newRoles = "";
           this.newRoleNames = "";
           this.newAuditionDate = "";
-          this.msg = true;
+          this.message = true;
           this.text = "The audition has been updated successfully.";
         });
       this.close();

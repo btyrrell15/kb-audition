@@ -41,10 +41,6 @@ const UserSchema = new Schema({
     Password: {
         type: String,
     },
-    Birthday: {
-        type: Date,
-        default: Date.now
-    },
     AuditionID: {
         type: Array,
     },

@@ -89,18 +89,6 @@
                             v-model="newZip"
                           ></v-text-field>
                         </v-col>
-                        <v-col cols="12" sm="12">
-                          <v-text-field         
-                            label="Username"
-                            v-model="newUsername"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="12">
-                          <v-text-field         
-                            label="New Password"
-                            v-model="newPassword"
-                          ></v-text-field>
-                        </v-col>
                       </v-row>
                     </v-container>
                   </v-card-text>
@@ -151,11 +139,9 @@ export default {
 
   methods: {
     ...mapActions(['getUser']),
-
    
 
     show(user) {
-      console.log(user)
       this.dialog = true;
       this.newCompanyName = user.CompanyName;
       this.newFirstName = user.FirstName;
@@ -166,10 +152,7 @@ export default {
       this.newCity = user.City;
       this.newState = user.State;
       this.newZip = user.Zip;
-      this.newUsername = user.Username;
-      // this.newPassword = user.Password;
       this.profileId = user._id
-      // this.adjustmentID = user._id;
     },
 
     close() {
@@ -179,7 +162,6 @@ export default {
     updateProfile() {
       var req_body = {
         CompanyName: this.newCompanyName,
-        Image: this.newImage,
         FirstName: this.newFirstName,
         LastName: this.newLastName,
         Phone: this.newPhone,
@@ -188,20 +170,16 @@ export default {
         City: this.newCity,
         State: this.newState,
         Zip: this.newZip,
-        Role: this.newRoles,
-        Birthday: this.Birthday,
-        Username: this.newUsername,
-        Password: this.newPassword,
       };
-      axios.put(`${url}/Users/${this.profileId}`, req_body).then((response) => {
+      axios.put(`${url}/Users/${this.profileId}`, req_body)
+      .then((response) => {
         this.getUser()
         if (response.status == 400) {
           response.json().then(function(data) {
-            alert(data.message);
+            alert(data.msg);
           });
         }
         this.newCompanyName= "";
-        this.newImage = "";
         this.newFirstName = "";
         this.newLastName = "";
         this.newPhone = "";
@@ -213,9 +191,9 @@ export default {
         this.newState = "";
         this.message =true;
         this.text ="The adjustment has been updated successfully.";
-        
       });
       this.close();
+
     },
 
   },

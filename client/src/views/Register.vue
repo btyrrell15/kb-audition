@@ -29,8 +29,11 @@
 
       </v-flex>
       <v-flex xs12 class="mb-2 mt-2">
-        <input  label="Upload File" type="file" v-on:change="selectFile($event)" class="grey">
-        <!-- <v-file-input dark label="Upload File" v-model="file" v-on:change="selectFile($event)"></v-file-input> -->
+        <div class="white pa-3">
+          <input  label="Upload File" type="file" v-on:change="selectFile($event)">
+          <!-- <v-file-input dark label="Upload File" v-model="file" v-on:change="selectFile($event)"></v-file-input> -->
+        </div>
+        
       </v-flex>
       <v-flex xs12 class="mb-2 mt-2">
         <v-btn class="pink white--text" @click="sendFile()">Send</v-btn>
@@ -40,22 +43,10 @@
 
     <v-layout row wrap class="ma-3" v-if="uploaded">
       <v-flex xs12>
-        <!-- <v-avatar size="300" class="mb-12 mt-12 deep-purple accent-1">
-          <! <v-img 
-            src="https://kbaudition.s3.us-west-1.amazonaws.com/images/1618068810692-q5.png"
-            
-            ></v-img> -->
-            <!-- <div id="adobe-dc-view"></div> -->
-            <!-- <pdf src="https://kbaudition.s3.us-west-1.amazonaws.com/images/1618069435073-Tyrell paperwork.pdf"></pdf>
-        </v-avatar> --> -->
         
       </v-flex>
       <v-flex xs12>
         <v-text-field dark label="Company Name" v-model="CompanyName" v-if="newRoles =='Company'"></v-text-field>
-      </v-flex>
-      <v-flex xs12>
-        <v-file-input dark label="Company Logo" v-model="Image" v-if="newRoles =='Company'"></v-file-input>
-        <v-file-input dark label="Headshot" v-model="Image" v-if="newRoles =='Performer' || newRoles == 'Judge'"></v-file-input>
       </v-flex>
       <v-flex xs12>
         <v-text-field dark label="First Name" v-model="FirstName"></v-text-field>
@@ -90,7 +81,7 @@
       <v-flex xs12>
         <v-text-field dark type="password" label="Confirm Password" v-model="ConfirmPassword"></v-text-field>
       </v-flex>
-      <v-btn class="cyan accent-3 mt-4 mb-4" @click="registerUser()">Save</v-btn>
+      <v-btn class="pink white--text mt-4 mb-4" @click="registerUser()">Save</v-btn>
 
     </v-layout>
 
@@ -126,7 +117,6 @@ export default {
       City: "",
       State: "",
       Zip: "",
-      Birthday: "",
       Username: "",
       Password: "",
       ConfirmPassword: "",
@@ -171,7 +161,6 @@ export default {
         State: this.State,
         Zip: this.Zip,
         Role: this.newRoles,
-        Birthday: this.Birthday,
         Username: this.Username,
         Password: this.Password,
         ConfirmPassword: this.ConfirmPassword
