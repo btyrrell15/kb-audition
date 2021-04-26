@@ -33,6 +33,7 @@ router.post('/', passport.authenticate('jwt',{
         Callback: req.body.Callback,
         AuditionID: req.body.AuditionID,
         JudgeID: req.body.JudgeID,
+        Image: req.body.Image,
       });
       await score.save()
       .then(data => {
@@ -115,6 +116,9 @@ router.put('/:scoreID', passport.authenticate('jwt',{
                 }
                 if (req.body.JudgeID != undefined){
                     score.JudgeID = req.body.JudgeID;
+                }
+                if (req.body.Image != undefined){
+                    score.Image = req.body.Image;
                 }
                 score.save().then(function(){
                     res.status(200);

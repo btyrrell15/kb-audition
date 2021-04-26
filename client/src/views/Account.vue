@@ -5,7 +5,7 @@
         <v-layout row wrap>
             <v-flex xs12 class="text-center">
                 <h1 class="font-weight-light mt-8"> My Account </h1>
-                <v-avatar size="150" class="mb-2 mt-5">
+                <v-avatar size="250" class="mb-2 mt-5">
                   <v-img :src="user.Image" class="ml-auto mr-auto mt-5 mb-5"></v-img>
 
                 </v-avatar>

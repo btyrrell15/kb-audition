@@ -32,6 +32,9 @@ const ScoreSchema = new Schema({
     JudgeID: {
         type: String,
     },
+    Image: {
+        type: String,
+    },
     
 });
 

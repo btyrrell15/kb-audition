@@ -8,7 +8,7 @@
             <h2 class="white--text font-weight-light">Welcome {{user.FirstName}}</h2>
             </v-flex>
           <v-flex xs12>
-            <v-avatar size="150" class="mb-2 mt-8 grey darken-4">
+            <v-avatar size="250" class="mb-2 mt-8 grey darken-4" :aspect-ratio="1.7">
             <v-img 
               :src="user.Image"
               

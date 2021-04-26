@@ -105,6 +105,7 @@ export default {
       scored: "",
       auditionName: "",
       temp: [],
+      image: "",
     }
   }, 
 
@@ -115,6 +116,7 @@ export default {
     getPerformer: function() {
         axios.get(`${url}/performer/${this.performerId}`).then(res => {
             this.performer = res.data.performer
+            this.image = this.performer.Image;
             console.log(this.performer + " this is the individual perfoerm")
             this.name = this.performer.Name
             console.log(this.name + " this is what needs to be added to the db")
@@ -134,6 +136,7 @@ export default {
         Notes: this.newNotes,
         AuditionID: this.auditionId,
         JudgeID: this.judgeId,
+        Image: this.image
         
       };
         this.message =true;
