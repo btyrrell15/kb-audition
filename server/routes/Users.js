@@ -11,9 +11,9 @@ const User = require('../model/Users')
 const Image = require('../model/Images')
 
 aws.config.update({
-  accessKeyId: "AKIA6HJTW2YSZUD3WLGB",
-  secretAccessKey: "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",
-  region: 'us-west-1'
+  accessKeyId: "",
+  secretAccessKey: "",
+  region: ''
 });
 
 const s3 = new aws.S3();
